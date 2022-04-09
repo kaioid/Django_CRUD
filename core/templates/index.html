@@ -2,31 +2,31 @@
 {% block content %}
 
 <h1>List View</h1>
-    <div class="row">
-            <div class="main">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for data in dataset %}
-                        <tr>
-                            <td>{{ data.id }}</td>
-                            <td>{{ data.title }}</td>
-                            <td>{{ data.description }}</td>
-                            <td>
-                            <a class="btn btn-warning" href="{% url 'update' data.pk %}">Edit</a>
-                            <a class="btn btn-danger" href="{% url 'delete' data.pk %}">Delete</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <a class="btn btn-primary" href="{% url 'create' %}">Add new item</a>
-            </div>
-    </div>
+
+<div class="main">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in dataset %}
+        <tr>
+            <td><a href="{% url 'detail_view' data.pk %}"> {{ data.id }}</a></td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.description }}</td>
+            <td>
+                <a class="btn btn-warning" href="{% url 'update' data.pk %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete' data.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'create' %}">Add new item</a>
+</div>
+
 {% endblock %}
