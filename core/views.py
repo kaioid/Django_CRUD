@@ -1,58 +1,38 @@
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import GeeksModel
-from .forms import GeeksForm
 
 
-def index(request):
-    return render(request, "index.html")
+class IndexView(ListView):
+    model = GeeksModel
+    template_name = 'index.html'
+    queryset = GeeksModel.objects.all()
+    context_object_name = 'dataset'
 
 
-def create_view(request):
-    form = GeeksForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/list")
-    context = {'form': form}
-    return render(request, "create_view.html", context)
+class DetailItemView(DetailView):
+    model = GeeksModel
+    template_name = 'detail_view.html'
+    context_object_name = 'dataset'
 
 
-def list_view(request):
-    context = {"dataset": GeeksModel.objects.all()}
-
-    return render(request, "list_view.html", context)
-
-
-def detail_view(request, id):
-    context = {"data": GeeksModel.objects.get(id=id)}
-
-    return render(request, "detail_view.html", context)
+class CreateItemView(CreateView):
+    model = GeeksModel
+    template_name = 'create_view.html'
+    fields = ['title', 'description']
+    success_url = reverse_lazy('index')
 
 
-def update_view(request, id):
-
-    obj = get_object_or_404(GeeksModel, id=id)
-
-    form = GeeksForm(request.POST or None, instance=obj)
-
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/list/")
-    context = {"form": form}
-
-    return render(request, "update_view.html", context)
+class UpdateItemView(UpdateView):
+    model = GeeksModel
+    template_name = 'update_view.html'
+    fields = ['title', 'description']
+    success_url = reverse_lazy('index')
 
 
-def delete_view(request, id):
-
-    context = {}
-
-    obj = get_object_or_404(GeeksModel, id=id)
-
-    if request.method == "POST":
-
-        obj.delete()
-
-        return HttpResponseRedirect("/")
-
-    return render(request, "delete_view.html", context)
+class DeleteItemView(DeleteView):
+    model = GeeksModel
+    template_name = 'delete_view.html'
+    success_url = reverse_lazy('index')

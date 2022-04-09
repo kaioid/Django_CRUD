@@ -5,12 +5,25 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>Welcome to the index page!</h1>
-    <br>
-    <h2>Type /list/ to access list_view</h2>
-    <h2>Type /create/ to access create_view</h2>
-    <h2>Type /list/id to access detail_view</h2>
-    <h2>Type /update/id to access update_view</h2>
-    <h2>Type /delete/id to access delete_view</h2>
+    <div class="main">
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in dataset %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.title }}</td>
+                    <td>{{ data.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
