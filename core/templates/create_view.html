@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Creating Page</title>
-</head>
-<body>
-    <h1>Creating form:</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+{% extends 'base.html' %}
+{% block content %}
 
-        {{ form.as_p }}
+<h1>Creating form:</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label class="col-sm-2 col-form-label">Title:</label>
+        <div class="col">
+            {{ form.title }}
+        </div>
+        <div>
+            <label class="col-sm-2 col-form-label">Description:</label>
+            <div class="col">
+                {{ form.description }}
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+</form>
 
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% endblock %}

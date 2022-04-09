@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail view</title>
-</head>
-<body>
-    <div class="main">
-        {{ dataset.title }}<br>
-        {{ dataset.description }}<br>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Detail view</h1>
+<div class="main">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ dataset.id }}</td>
+            <td>{{ dataset.title }}</td>
+            <td>{{ dataset.description }}</td>
+            <td>
+                <a class="btn btn-warning" href="{% url 'update' dataset.pk %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete' dataset.pk %}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
