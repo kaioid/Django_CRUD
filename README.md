@@ -20,3 +20,6 @@ Para rodar o projeto clone o repositório, instale as dependências e execute os
 <img src="https://github.com/kaioid/Django_CRUD/blob/e463abdae3509ef47568526f7a406ac3b1b70b50/prints/Delete_page.PNG">
 
 
+### Test report:
+<img src="https://github.com/kaioid/Django_CRUD/blob/9dd84e118648502124956842e5870e298f5545bb/prints/test_report.PNG">
+
